@@ -2,12 +2,22 @@
 	<div :class="`text-${field.textAlign}`">
 		<tooltip trigger="hover">
 			<div class="text-primary inline-flex items-center dim cursor-pointer">
-				<span class="text-primary font-bold">{{ __("View") }}</span>
+				<!-- <span class="text-primary font-bold">{{ __("View") }}</span> -->
+                <p>
+                    <img
+                    v-if="field.image"
+                    :src="field.image"
+                    style="object-fit: cover"
+                    class="align-bottom w-8 h-8"
+                    :class="{ 'rounded-full': field.rounded, rounded: !field.rounded }"
+                    />
+                    <span v-else>&mdash;</span>
+                </p>
 			</div>
 
 			<tooltip-content slot="content">
-				<template v-if="image !== undefined">
-					<img :src="image" :alt="__('Photo')" />
+				<template v-if="field.image !== undefined">
+					<img :src="field.image" :alt="__('Photo')" :width="field.width"/>
 				</template>
 				<ul class="list-reset">
 					<li v-for="option in value" class="mb-1" :key="option">
